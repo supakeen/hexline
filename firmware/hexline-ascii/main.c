@@ -32,34 +32,48 @@
 
 #define DB 0xFF
 
-char text[AREA_CHAR_C+1] = { 0 };
+char     text[AREA_CHAR_C+1] = { 0 };
 uint16_t area[AREA_SIZE] = { 0 };
 
+// Busy loop over serial input, if we receive any we add it to the text
+// buffer which is smashed into the area in the correct format on every
+// execution of `draw_timer` (see below).
 void loop(void) {
     int p = 0;
 
     while(true) {
         int c = getchar_timeout_us(10);
 
+        // Retry when there wasn't any character available.
         if(c == PICO_ERROR_TIMEOUT) {
             continue;
         }
 
+        // If enter, clear screen.
         if(c == '\r') {
             p = 0;
             memset(text, 0, 33);
             continue;
         }
 
+        // If text too long, wrap around.
         if(p >= AREA_CHAR_C) {
             p = 0;
             memset(text, 0, AREA_CHAR_C+1);
         }
 
+        // Write the text to the buffer.
         text[p++] = c;
     }
 }
 
+// We draw our screen (send out our data over UART) every ~10 milliseconds,
+// generally it takes about 5-6 milliseconds to flush all the data out in the
+// current blocking setup.
+//
+// This gives us a framerate of about 1/0.016 which is close enough to 60
+// frames per second as long as we don't take too long on writing characters to
+// the buffer(s).
 bool draw_timer(__unused struct repeating_timer *_) {
     area_fade(area);
     area_text_ltr(area, text);
@@ -83,6 +97,7 @@ int main() {
     area_clear(area);
     disp_draw(area);
 
+    // Sets up our 'rendering loop'.
     struct repeating_timer t;
     add_repeating_timer_ms(10, draw_timer, NULL, &t);
 
