@@ -5,6 +5,17 @@ A marquee of 32 16-segment characters.
 > [!NOTE]  
 > This project is a remix of the [hexboard](https://github.com/brainsmoke/hexboard) project by [brainsmoke](https://github.com/brainsmoke). Take a look to see what the project was originally designed to do, it's awesome.
 
+![](image.jpg)
+
+# Usage
+
+> [!WARNING]  
+> This firmware works (on `main`) but is in flux. I still want to add various other features and such.
+
+Build and flash the firmware onto a Pi Pico. Connect the UART from the PCB to pin 4 on your Pi Pico. Make sure to tie SWDIO from the PCB to ground. When you plug in the Pi Pico to USB a new `/dev/ttyACMx` will appear. You can connect to it with your favorite serial emulator at 115200 baud; for example `screen /dev/ttyACM0 115200`.
+
+You can then type and letters will appear. `\r` clears the screen.
+
 # Components
 
 ## PCB
