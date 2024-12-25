@@ -39,7 +39,6 @@ add_executable(
     hexline
     main.c
     area.c
-    text.c
     disp.c)
 
 pico_generate_pio_header(
