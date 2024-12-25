@@ -34,7 +34,7 @@ void disp_init() {
         true);
 }
 
-void disp_draw(char *area) {
-    uart_write_blocking(UART_ID, area, AREA_SIZE);
+void disp_draw(uint16_t *area) {
+    uart_write_blocking(UART_ID, (char*) area, AREA_SIZE * 2);
     uart_write_blocking(UART_ID, "\xFF\xFF\xFF\xF0", 4);
 }

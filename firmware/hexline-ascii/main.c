@@ -31,12 +31,12 @@
 
 #include "pico/stdlib.h"
 #include "pico/stdio.h"
-#include "pico/sync.h"
 
 #include "hardware/uart.h"
 
 #include <stdio.h>
 #include <string.h>
+#include <stdint.h>
 
 #include "area.h"
 #include "disp.h"
@@ -44,9 +44,7 @@
 #define DB 0xFF
 
 char text[AREA_CHAR_C+1] = { 0 };
-char area[2][AREA_SIZE] = { 0 };
-
-struct mutex area_mut;
+uint16_t area[2][AREA_SIZE] = { 0 };
 
 void loop(void) {
     int p = 0;
@@ -74,14 +72,9 @@ void loop(void) {
 }
 
 bool draw_timer(__unused struct repeating_timer *_) {
-    if(mutex_try_enter(&area_mut, NULL)) {
-        area_fade(area[0]);
-        area_text_ltr(area[0], text);
-        disp_draw(area[0]);
-        mutex_exit(&area_mut);
-    } else {
-        printf("draw_timer: failed to get lock\n");
-    }
+    area_fade(area[0]);
+    area_text_ltr(area[0], text);
+    disp_draw(area[0]);
 
     return true;
 }
@@ -100,9 +93,6 @@ int main() {
     // possible bits and bobs still on the display.
     area_clear(area[0]);
     disp_draw(area[0]);
-
-    // Initialize our lock
-    mutex_init(&area_mut);
 
     struct repeating_timer t;
     add_repeating_timer_ms(10, draw_timer, NULL, &t);

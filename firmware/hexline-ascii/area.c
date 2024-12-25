@@ -29,359 +29,356 @@
 
 inline void area_init(void) {}
 
-inline void area_set_segment(char *area, uint16_t value) {
+inline void area_set_segment(uint16_t *area, uint16_t value) {
     if(value >= 0xFF00) value = 0xFF00;
 
-    area[0] = value & 0xFF;
-    area[1] = value >> 8;
+    area[0] = value;
 }
 
-inline void area_set_letter(char *area, char letter) {
+inline void area_set_letter(uint16_t *area, char letter) {
     switch(letter) {
         case ' ':
             break;
         case '?':
             area_set_segment(&area[0], DB);
-            area_set_segment(&area[2], DB);
-            area_set_segment(&area[14], DB);
-            area_set_segment(&area[24], DB);
+            area_set_segment(&area[1], DB);
+            area_set_segment(&area[7], DB);
+            area_set_segment(&area[12], DB);
             break;
         case '0':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
+            area_set_segment(&area[3], DB);
             area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
+            area_set_segment(&area[5], DB);
 
             break;
         case '1':
-            area_set_segment(&area[18], DB);
-            area_set_segment(&area[24], DB);
+            area_set_segment(&area[9], DB);
+            area_set_segment(&area[12], DB);
 
             break;
         case '2':
             area_set_segment(&area[0], DB);
-            area_set_segment(&area[2], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
+            area_set_segment(&area[1], DB);
+            area_set_segment(&area[3], DB);
+            area_set_segment(&area[4], DB);
 
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
 
             break;
         case '3':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
-            area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
+            area_set_segment(&area[3], DB);
 
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
 
             break;
         case '4':
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
-            area_set_segment(&area[4], DB);
-            area_set_segment(&area[10], DB);
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[5], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
 
             break;
         case '5':
             area_set_segment(&area[0], DB);
-            area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[10], DB);
+            area_set_segment(&area[2], DB);
+            area_set_segment(&area[3], DB);
+            area_set_segment(&area[5], DB);
 
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
 
             break;
         case '6':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[2], DB);
+            area_set_segment(&area[3], DB);
             area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
+            area_set_segment(&area[5], DB);
 
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
 
             break;
 
         case '7':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
-            area_set_segment(&area[4], DB);
 
             break;
         case '8':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
+            area_set_segment(&area[3], DB);
             area_set_segment(&area[4], DB);
+            area_set_segment(&area[5], DB);
             area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[7], DB);
 
             break;
         case '9':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
-            area_set_segment(&area[4], DB);
+            area_set_segment(&area[3], DB);
+            area_set_segment(&area[5], DB);
             area_set_segment(&area[6], DB);
-            area_set_segment(&area[10], DB);
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[7], DB);
 
             break;
         case 'a':
         case 'A':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
             area_set_segment(&area[4], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
+            area_set_segment(&area[5], DB);
 
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
 
             break;
         case 'b':
         case 'B':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
-            area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
+            area_set_segment(&area[3], DB);
 
-            area_set_segment(&area[14], DB);
-            area_set_segment(&area[18], DB);
-            area_set_segment(&area[24], DB);
+            area_set_segment(&area[7], DB);
+            area_set_segment(&area[9], DB);
+            area_set_segment(&area[12], DB);
             break;
         case 'c':
         case 'C':
             area_set_segment(&area[0], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
+            area_set_segment(&area[3], DB);
+            area_set_segment(&area[4], DB);
+            area_set_segment(&area[5], DB);
             break;
         case 'd':
         case 'D':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
-            area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[18], DB);
-            area_set_segment(&area[24], DB);
+            area_set_segment(&area[3], DB);
+            area_set_segment(&area[9], DB);
+            area_set_segment(&area[12], DB);
             break;
         case 'e':
         case 'E':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[3], DB);
+            area_set_segment(&area[4], DB);
+            area_set_segment(&area[5], DB);
             area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
-            area_set_segment(&area[12], DB);
             break;
         case 'f':
         case 'F':
             area_set_segment(&area[0], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
-            area_set_segment(&area[12], DB);
+            area_set_segment(&area[4], DB);
+            area_set_segment(&area[5], DB);
+            area_set_segment(&area[6], DB);
             break;
         case 'g':
         case 'G':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[2], DB);
+            area_set_segment(&area[3], DB);
             area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[5], DB);
+            area_set_segment(&area[7], DB);
             break;
         case 'h':
         case 'H':
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
             area_set_segment(&area[4], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[5], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
             break;
         case 'i':
         case 'I':
             area_set_segment(&area[0], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[18], DB);
-            area_set_segment(&area[24], DB);
+            area_set_segment(&area[3], DB);
+            area_set_segment(&area[9], DB);
+            area_set_segment(&area[12], DB);
             break;
         case 'j':
         case 'J':
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
+            area_set_segment(&area[3], DB);
             area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
             break;
         case 'k':
         case 'K':
+            area_set_segment(&area[2], DB);
             area_set_segment(&area[4], DB);
-            area_set_segment(&area[8], DB);
+            area_set_segment(&area[5], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
             area_set_segment(&area[10], DB);
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
-            area_set_segment(&area[20], DB);
             break;
         case 'l':
         case 'L':
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
+            area_set_segment(&area[3], DB);
+            area_set_segment(&area[4], DB);
+            area_set_segment(&area[5], DB);
             break;
         case 'm':
         case 'M':
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
             area_set_segment(&area[4], DB);
+            area_set_segment(&area[5], DB);
             area_set_segment(&area[8], DB);
             area_set_segment(&area[10], DB);
-            area_set_segment(&area[16], DB);
-            area_set_segment(&area[20], DB);
-            break;
             break;
         case 'n':
         case 'N':
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
             area_set_segment(&area[4], DB);
+            area_set_segment(&area[5], DB);
             area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
-            area_set_segment(&area[16], DB);
-            area_set_segment(&area[22], DB);
+            area_set_segment(&area[11], DB);
             break;
         case 'o':
         case 'O':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
+            area_set_segment(&area[3], DB);
             area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
+            area_set_segment(&area[5], DB);
             break;
         case 'p':
         case 'P':
             area_set_segment(&area[0], DB);
-            area_set_segment(&area[2], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
-
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[1], DB);
+            area_set_segment(&area[4], DB);
+            area_set_segment(&area[5], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
             break;
         case 'q':
         case 'Q':
             area_set_segment(&area[0], DB);
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
+            area_set_segment(&area[3], DB);
             area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
-            area_set_segment(&area[22], DB);
+            area_set_segment(&area[5], DB);
+            area_set_segment(&area[11], DB);
             break;
         case 'r':
         case 'R':
             area_set_segment(&area[0], DB);
-            area_set_segment(&area[2], DB);
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
-            area_set_segment(&area[22], DB);
+            area_set_segment(&area[1], DB);
+            area_set_segment(&area[4], DB);
+            area_set_segment(&area[5], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
+            area_set_segment(&area[11], DB);
             break;
         case 's':
         case 'S':
             area_set_segment(&area[0], DB);
-            area_set_segment(&area[14], DB);
-            area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[16], DB);
+            area_set_segment(&area[2], DB);
+            area_set_segment(&area[3], DB);
+            area_set_segment(&area[7], DB);
+            area_set_segment(&area[8], DB);
             break;
         case 't':
         case 'T':
             area_set_segment(&area[0], DB);
-            area_set_segment(&area[18], DB);
-            area_set_segment(&area[24], DB);
+            area_set_segment(&area[9], DB);
+            area_set_segment(&area[12], DB);
             break;
         case 'u':
         case 'U':
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
+            area_set_segment(&area[3], DB);
             area_set_segment(&area[4], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
+            area_set_segment(&area[5], DB);
             break;
         case 'v':
         case 'V':
-            area_set_segment(&area[8], DB);
+            area_set_segment(&area[4], DB);
+            area_set_segment(&area[5], DB);
             area_set_segment(&area[10], DB);
-            area_set_segment(&area[20], DB);
-            area_set_segment(&area[26], DB);
+            area_set_segment(&area[13], DB);
             break;
         case 'w':
         case 'W':
+            area_set_segment(&area[1], DB);
             area_set_segment(&area[2], DB);
             area_set_segment(&area[4], DB);
-            area_set_segment(&area[8], DB);
-            area_set_segment(&area[10], DB);
-            area_set_segment(&area[22], DB);
-            area_set_segment(&area[26], DB);
+            area_set_segment(&area[5], DB);
+            area_set_segment(&area[11], DB);
+            area_set_segment(&area[13], DB);
             break;
         case 'x':
         case 'X':
-            area_set_segment(&area[16], DB);
-            area_set_segment(&area[20], DB);
-            area_set_segment(&area[22], DB);
-            area_set_segment(&area[26], DB);
+            area_set_segment(&area[8], DB);
+            area_set_segment(&area[10], DB);
+            area_set_segment(&area[11], DB);
+            area_set_segment(&area[13], DB);
             break;
         case 'y':
         case 'Y':
-            area_set_segment(&area[2], DB);
-            area_set_segment(&area[10], DB);
+            area_set_segment(&area[1], DB);
+            area_set_segment(&area[5], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
             area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
-            area_set_segment(&area[24], DB);
             break;
         case 'z':
         case 'Z':
             area_set_segment(&area[0], DB);
-            area_set_segment(&area[6], DB);
-            area_set_segment(&area[20], DB);
-            area_set_segment(&area[26], DB);
+            area_set_segment(&area[3], DB);
+            area_set_segment(&area[10], DB);
+            area_set_segment(&area[13], DB);
             break;
         case '-':
-            area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
             break;
         case '_':
-            area_set_segment(&area[6], DB);
+            area_set_segment(&area[3], DB);
             break;
         case '/':
-            area_set_segment(&area[20], DB);
-            area_set_segment(&area[26], DB);
+            area_set_segment(&area[10], DB);
+            area_set_segment(&area[13], DB);
             break;
         case '\\':
-            area_set_segment(&area[16], DB);
-            area_set_segment(&area[22], DB);
+            area_set_segment(&area[8], DB);
+            area_set_segment(&area[11], DB);
             break;
         case ',':
-            area_set_segment(&area[26], DB);
+            area_set_segment(&area[13], DB);
             break;
         case '+':
+            area_set_segment(&area[6], DB);
+            area_set_segment(&area[7], DB);
+            area_set_segment(&area[9], DB);
             area_set_segment(&area[12], DB);
-            area_set_segment(&area[14], DB);
-            area_set_segment(&area[18], DB);
-            area_set_segment(&area[24], DB);
             break;
         case '.':
-            area_set_segment(&area[28], DB);
+            area_set_segment(&area[14], DB);
             break;
         default:
             area_set_segment(&area[0], 0xFFFF);
@@ -389,23 +386,18 @@ inline void area_set_letter(char *area, char letter) {
 }
 
 
-inline void area_clear(char *area) {
-    memset(area, 0, AREA_SIZE);
+inline void area_clear(uint16_t *area) {
+    memset(area, 0, AREA_SIZE * sizeof(uint16_t));
 }
 
-inline void area_text_ltr(char *area, char *text) {
-    area_text_ltr_at(area, text, 0);
-}
-
-inline void area_text_ltr_at(char *area, char *text, int pos) {
-    for(int i = pos; i < strlen(text) && i <= AREA_CHAR_C; i++) {
-        area_set_letter(&area[i*AREA_CHAR_C], text[i - pos]);
+inline void area_text_ltr(uint16_t *area, char *text) {
+    for(int i = 0; i < strlen(text) && i < AREA_CHAR_C; i++) {
+        area_set_letter(&area[i*16], text[i]);
     }
 }
 
-inline void area_fade(char *area) {
-    for(int i = 0; i < AREA_SIZE; i = i + 2) {
-        area[i+0] = area[i+0] * 0.5;
-        area[i+1] = area[i+1] * 0.5;
+inline void area_fade(uint16_t *area) {
+    for(int i = 0; i < AREA_SIZE; i++) {
+        area[i] = area[i] * 0.5;
     }
 }
