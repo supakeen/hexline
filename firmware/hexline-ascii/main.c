@@ -1,15 +1,6 @@
-// This file contains the firmware for 
-//
-// TODO:
-// - [ ] Double buffering and switching?
-// - [ ] Draw in the main loop?
-// - [ ] Use DMA for the UART, same as emberpi, with a PIO for the UART and switching the frames around so we can
-//       draw on the second buffer
-// - [ ] Implement a nice fosforous glow effect?
-//
 // This file is licensed under the MIT license
 //
-// Copyright 2012 supakeen
+// Copyright 2024 Simon de Vlieger
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to
