@@ -32,8 +32,6 @@
 #include "pico/stdlib.h"
 #include "pico/stdio.h"
 
-#include "hardware/uart.h"
-
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>

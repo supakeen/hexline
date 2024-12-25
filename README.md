@@ -15,4 +15,4 @@ You can find the PCB for this at the [original project](https://github.com/brain
 
 The `hexline-ascii` firmware provides a Serial-over-USB interface that consumes ascii text. The firmware takes care of rendering to the segments for you.
 
-You can run the firmware on a [Raspberry Pi Pico](...) with `UART1` (usually, `GPIO 4`) connected to the UART on the PCB. If you want to fiddle with the firmware you can open their containing directories with the [Pico SDK](https://github.com/raspberrypi/pico-sdk) somewhere in your environment.
+You can run the firmware on a [Raspberry Pi Pico](...) with GPIO 4 connected to the UART on the PCB. If you want to fiddle with the firmware you can open their containing directories with the [Pico SDK](https://github.com/raspberrypi/pico-sdk) somewhere in your environment.

@@ -3,38 +3,34 @@
 
 #include "pico/stdlib.h"
 
-#include "hardware/uart.h"
+#include "hardware/pio.h"
+#include "uart_tx.pio.h"
+
+PIO pio;
+uint sm;
+uint offset;
 
 void disp_init() {
-    uart_init(
-        UART_ID,
-        BAUD_RATE);
-
-    gpio_set_function(
-        UART_TX_PIN,
-        GPIO_FUNC_UART);
-
-    gpio_set_function(
-        UART_RX_PIN,
-        GPIO_FUNC_UART);
-
-    uart_set_hw_flow(
-        UART_ID,
-        false,
-        false);
-
-    uart_set_format(
-        UART_ID,
-        8,
+    bool success = pio_claim_free_sm_and_add_program_for_gpio_range(
+        &uart_tx_program,
+        &pio,
+        &sm,
+        &offset,
+        DISP_PIN,
         1,
-        UART_PARITY_NONE);
-
-    uart_set_fifo_enabled(
-        UART_ID,
         true);
+    
+    hard_assert(success);
+
+    uart_tx_program_init(
+        pio,
+        sm,
+        offset,
+        DISP_PIN,
+        DISP_BAUD);
 }
 
 void disp_draw(uint16_t *area) {
-    uart_write_blocking(UART_ID, (char*) area, AREA_SIZE * 2);
-    uart_write_blocking(UART_ID, "\xFF\xFF\xFF\xF0", 4);
+    uart_tx_program_puts(pio, sm, (char*) area, AREA_SIZE*2);
+    uart_tx_program_puts(pio, sm, "\xFF\xFF\xFF\xF0", 4);
 }

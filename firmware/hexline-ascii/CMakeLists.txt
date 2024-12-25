@@ -35,11 +35,16 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(hexline
+add_executable(
+    hexline
     main.c
     area.c
     text.c
     disp.c)
+
+pico_generate_pio_header(
+    hexline
+    ${CMAKE_CURRENT_LIST_DIR}/uart_tx.pio)
 
 pico_set_program_name(hexline "hexline")
 pico_set_program_version(hexline "0.1")
@@ -50,7 +55,8 @@ pico_enable_stdio_usb(hexline 1)
 
 # Add the standard library to the build
 target_link_libraries(hexline
-        pico_stdlib)
+        pico_stdlib
+        hardware_pio)
 
 # Add the standard include files to the build
 target_include_directories(hexline PRIVATE
