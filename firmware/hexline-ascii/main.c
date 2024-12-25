@@ -42,7 +42,7 @@
 #define DB 0xFF
 
 char text[AREA_CHAR_C+1] = { 0 };
-uint16_t area[2][AREA_SIZE] = { 0 };
+uint16_t area[AREA_SIZE] = { 0 };
 
 void loop(void) {
     int p = 0;
@@ -70,9 +70,9 @@ void loop(void) {
 }
 
 bool draw_timer(__unused struct repeating_timer *_) {
-    area_fade(area[0]);
-    area_text_ltr(area[0], text);
-    disp_draw(area[0]);
+    area_fade(area);
+    area_text_ltr(area, text);
+    disp_draw(area);
 
     return true;
 }
@@ -89,8 +89,8 @@ int main() {
 
     // Start with an empty area and draw it immediately, this gets rid of any
     // possible bits and bobs still on the display.
-    area_clear(area[0]);
-    disp_draw(area[0]);
+    area_clear(area);
+    disp_draw(area);
 
     struct repeating_timer t;
     add_repeating_timer_ms(10, draw_timer, NULL, &t);
