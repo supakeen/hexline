@@ -27,3 +27,11 @@ You can find the PCB for this at the [original project](https://github.com/brain
 The `hexline-ascii` firmware provides a Serial-over-USB interface that consumes ascii text. The firmware takes care of rendering to the segments for you.
 
 You can run the firmware on a [Raspberry Pi Pico](...) with GPIO 4 connected to the UART on the PCB. If you want to fiddle with the firmware you can open their containing directories with the [Pico SDK](https://github.com/raspberrypi/pico-sdk) somewhere in your environment.
+
+## Housing
+
+You can find STLs in the [./hardware/housing](./hardware/housing) directory. These can be printed at home. You have to print one of each with the except ion of `left.stl` and `right.stl` which both have to be printed twice.
+
+The alignment pins fit loosely on purpose; you can wrap them with some paper to make them tight fitting. When fitting the midsection you need to pull it apart a bit to slide it over the bottom header on the PCB, be careful not to bend any pins.
+
+The right endcap contains room for a USB-C breakout board which you can then solder onto your preferred USB connection internally.
