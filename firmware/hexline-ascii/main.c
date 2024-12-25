@@ -39,7 +39,7 @@
 #include <string.h>
 
 #include "area.h"
-#include "draw.h"
+#include "disp.h"
 
 #define DB 0xFF
 
@@ -77,7 +77,7 @@ bool draw_timer(__unused struct repeating_timer *_) {
     if(mutex_try_enter(&area_mut, NULL)) {
         area_fade(area[0]);
         area_text_ltr(area[0], text);
-        draw(area[0]);
+        disp_draw(area[0]);
         mutex_exit(&area_mut);
     } else {
         printf("draw_timer: failed to get lock\n");
@@ -91,7 +91,7 @@ int main() {
 
     // Drawing takes care of the communication with the display PCB, we draw
     // areas.
-    draw_init();
+    disp_init();
 
     // Areas contain the values that we want to display.
     area_init();
@@ -99,7 +99,7 @@ int main() {
     // Start with an empty area and draw it immediately, this gets rid of any
     // possible bits and bobs still on the display.
     area_clear(area[0]);
-    draw(area[0]);
+    disp_draw(area[0]);
 
     // Initialize our lock
     mutex_init(&area_mut);

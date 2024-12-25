@@ -1,11 +1,11 @@
-#include "draw.h"
+#include "disp.h"
 #include "area.h"
 
 #include "pico/stdlib.h"
 
 #include "hardware/uart.h"
 
-void draw_init() {
+void disp_init() {
     uart_init(
         UART_ID,
         BAUD_RATE);
@@ -34,7 +34,7 @@ void draw_init() {
         true);
 }
 
-void draw(char *area) {
+void disp_draw(char *area) {
     uart_write_blocking(UART_ID, area, AREA_SIZE);
     uart_write_blocking(UART_ID, "\xFF\xFF\xFF\xF0", 4);
 }

@@ -7,7 +7,7 @@
 #define UART_TX_PIN 4
 #define UART_RX_PIN 5
 
-void draw_init(void);
-void draw(char*);
+void disp_init(void);
+void disp_draw(char*);
 
 #endif

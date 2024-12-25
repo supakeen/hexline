@@ -39,7 +39,7 @@ add_executable(hexline
     main.c
     area.c
     text.c
-    draw.c)
+    disp.c)
 
 pico_set_program_name(hexline "hexline")
 pico_set_program_version(hexline "0.1")
