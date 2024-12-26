@@ -1,6 +1,7 @@
 #ifndef DRAW_H
 #define DRAW_H
 
+#include <stdlib.h>
 #include <stdint.h>
 
 #define DISP_PIN 4
@@ -30,5 +31,7 @@ void disp_clear(struct disp*);
 
 void disp_char_set(struct disp*, char*);
 void disp_char_set_at_position(struct disp*, int, char);
+
+
 
 #endif
