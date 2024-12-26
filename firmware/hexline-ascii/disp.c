@@ -61,11 +61,11 @@ void disp_draw(struct disp *D) {
 }
 
 // Write a `char*` to the display up to a maximum of the display size.
-void disp_text_set(struct disp *D, char *text) {
+void disp_char_set(struct disp *D, char *text) {
     hard_assert(D->mode == DISP_MODE_CHAR);
 
     for(int i = 0; i < strlen(text) && i < AREA_CHAR_C; i++) {
-        disp_text_set_at_position(D, i, text[i]);
+        disp_char_set_at_position(D, i, text[i]);
     }
 }
 
@@ -73,7 +73,7 @@ void disp_text_set(struct disp *D, char *text) {
 // character to its offset in segments and translating a character to the
 // segments it consists of. A bit of a multi-purpose function that should
 // probably be split out.
-void disp_text_set_at_position(struct disp* D, int p, char c) {
+void disp_char_set_at_position(struct disp* D, int p, char c) {
     hard_assert(D->mode == DISP_MODE_CHAR);
 
     uint16_t *area = &D->area[p*16];
