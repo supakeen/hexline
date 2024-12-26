@@ -76,7 +76,7 @@ void loop(void) {
 // the buffer(s).
 bool draw_timer(__unused struct repeating_timer *_) {
     disp_clear(D);
-    disp_text_set(D, text);
+    disp_char_set(D, text);
     disp_draw(D);
 
     return true;

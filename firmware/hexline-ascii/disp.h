@@ -28,6 +28,7 @@ struct disp* disp_init(uint8_t);
 void disp_draw(struct disp*);
 void disp_clear(struct disp*);
 
-void disp_text_set(struct disp*, char*);
-void disp_text_set_at_position(struct disp*, int, char);
+void disp_char_set(struct disp*, char*);
+void disp_char_set_at_position(struct disp*, int, char);
+
 #endif
