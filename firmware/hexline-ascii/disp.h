@@ -15,11 +15,15 @@
 // the end of frame marker (4)
 #define AREA_SIZE AREA_CHAR_C * AREA_SEG_C
 
+#define DISP_MODE_CHAR 0
+#define DISP_MODE_UI16 1
+
 struct disp {
+    uint8_t mode;
     uint16_t area[AREA_SIZE];
 };
 
-struct disp* disp_init();
+struct disp* disp_init(uint8_t);
 
 void disp_draw(struct disp*);
 void disp_clear(struct disp*);

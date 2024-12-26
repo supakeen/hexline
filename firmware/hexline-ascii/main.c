@@ -85,7 +85,7 @@ bool draw_timer(__unused struct repeating_timer *_) {
 int main() {
     stdio_init_all();
 
-    D = disp_init();
+    D = disp_init(DISP_MODE_CHAR);
 
     // Sets up our 'rendering loop'.
     struct repeating_timer t;
