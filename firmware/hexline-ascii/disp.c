@@ -41,26 +41,34 @@ struct disp* disp_init(void) {
     return D;
 }
 
+// Clear the display, call `disp_draw` after.
 void disp_clear(struct disp *D) {
     memset(D->area, 0, AREA_SIZE * sizeof(uint16_t));
 }
 
+// Set a single segment to a clamped value.
 void disp_set(struct disp *D, int p, uint16_t v) {
     if(v >= 0xFF00) v = 0xFF00;
     D->area[p] = v;
 }
 
+// Send over the internal area buffer to the connected screen.
 void disp_draw(struct disp *D) {
     uart_tx_program_puts(pio, sm, (char*) D->area, AREA_SIZE*2);
     uart_tx_program_puts(pio, sm, "\xFF\xFF\xFF\xF0", 4);
 }
 
+// Write a `char*` to the display up to a maximum of the display size.
 void disp_text_set(struct disp *D, char *text) {
     for(int i = 0; i < strlen(text) && i < AREA_CHAR_C; i++) {
         disp_text_set_at_position(D, i, text[i]);
     }
 }
 
+// Set a character at a specific position. This handles translating the
+// character to its offset in segments and translating a character to the
+// segments it consists of. A bit of a multi-purpose function that should
+// probably be split out.
 void disp_text_set_at_position(struct disp* D, int p, char c) {
     uint16_t *area = &D->area[p*16];
 
