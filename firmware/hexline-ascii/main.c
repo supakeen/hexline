@@ -27,13 +27,13 @@
 #include <string.h>
 #include <stdint.h>
 
-#include "area.h"
 #include "disp.h"
 
 #define DB 0xFF
 
 char     text[AREA_CHAR_C+1] = { 0 };
-uint16_t area[AREA_SIZE] = { 0 };
+
+struct disp *D = { 0 };
 
 // Busy loop over serial input, if we receive any we add it to the text
 // buffer which is smashed into the area in the correct format on every
@@ -75,9 +75,9 @@ void loop(void) {
 // frames per second as long as we don't take too long on writing characters to
 // the buffer(s).
 bool draw_timer(__unused struct repeating_timer *_) {
-    area_fade(area);
-    area_text_ltr(area, text);
-    disp_draw(area);
+    disp_clear(D);
+    disp_text_set(D, text);
+    disp_draw(D);
 
     return true;
 }
@@ -85,17 +85,7 @@ bool draw_timer(__unused struct repeating_timer *_) {
 int main() {
     stdio_init_all();
 
-    // Drawing takes care of the communication with the display PCB, we draw
-    // areas.
-    disp_init();
-
-    // Areas contain the values that we want to display.
-    area_init();
-
-    // Start with an empty area and draw it immediately, this gets rid of any
-    // possible bits and bobs still on the display.
-    area_clear(area);
-    disp_draw(area);
+    D = disp_init();
 
     // Sets up our 'rendering loop'.
     struct repeating_timer t;
