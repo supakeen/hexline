@@ -15,7 +15,7 @@ PIO pio;
 uint sm;
 uint offset;
 
-struct disp* disp_init(void) {
+struct disp* disp_init(uint8_t mode) {
     bool success = pio_claim_free_sm_and_add_program_for_gpio_range(
         &uart_tx_program,
         &pio,
@@ -37,6 +37,8 @@ struct disp* disp_init(void) {
     struct disp *D = malloc(sizeof(struct disp));
 
     hard_assert(D != NULL);
+
+    D->mode = mode;
 
     return D;
 }
@@ -60,6 +62,8 @@ void disp_draw(struct disp *D) {
 
 // Write a `char*` to the display up to a maximum of the display size.
 void disp_text_set(struct disp *D, char *text) {
+    hard_assert(D->mode == DISP_MODE_CHAR);
+
     for(int i = 0; i < strlen(text) && i < AREA_CHAR_C; i++) {
         disp_text_set_at_position(D, i, text[i]);
     }
@@ -70,6 +74,8 @@ void disp_text_set(struct disp *D, char *text) {
 // segments it consists of. A bit of a multi-purpose function that should
 // probably be split out.
 void disp_text_set_at_position(struct disp* D, int p, char c) {
+    hard_assert(D->mode == DISP_MODE_CHAR);
+
     uint16_t *area = &D->area[p*16];
 
     p = p * 16;
