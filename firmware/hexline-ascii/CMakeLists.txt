@@ -54,6 +54,7 @@ pico_enable_stdio_usb(hexline 1)
 # Add the standard library to the build
 target_link_libraries(hexline
         pico_stdlib
+        pico_multicore
         hardware_pio)
 
 # Add the standard include files to the build

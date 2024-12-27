@@ -22,6 +22,7 @@
 
 #include "pico/stdlib.h"
 #include "pico/stdio.h"
+#include "pico/multicore.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -67,19 +68,18 @@ void loop(void) {
     }
 }
 
-// We draw our screen (send out our data over UART) every ~10 milliseconds,
-// generally it takes about 5-6 milliseconds to flush all the data out in the
-// current blocking setup.
-//
-// This gives us a framerate of about 1/0.016 which is close enough to 60
-// frames per second as long as we don't take too long on writing characters to
-// the buffer(s).
-bool draw_timer(__unused struct repeating_timer *_) {
-    disp_clear(D);
-    disp_char_set(D, text);
-    disp_draw(D);
+void main_core0(void) {
+    loop();
+}
 
-    return true;
+// On core1 we continuously draw the display in a loop, we want to split this out
+// later when we do double buffering again.
+void main_core1(void) {
+    while(1) {
+        disp_clear(D);
+        disp_char_set(D, text);
+        disp_draw(D);
+    }
 }
 
 int main() {
@@ -87,9 +87,6 @@ int main() {
 
     D = disp_init(DISP_MODE_CHAR);
 
-    // Sets up our 'rendering loop'.
-    struct repeating_timer t;
-    add_repeating_timer_ms(10, draw_timer, NULL, &t);
-
-    loop();
+    multicore_launch_core1(main_core1);
+    main_core0();
 }
