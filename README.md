@@ -18,6 +18,19 @@ You can then type and letters will appear. `\r` clears the screen.
 
 # Components
 
+## Software
+
+This repository is also a Go package that can interface with the firmware provided in the same repository. If you want to run directly from source checkout:
+
+```
+€ go run ./main.go display 'some text'
+# displays 'some text'
+€ go run ./main.go display -d 1000 'some text' 'some other text'
+# displays 'some text', waits 1000ms, displays 'some other text'
+€ go run ./main.go display < /etc/passwd
+# displays the lines from `/etc/passwd` with a wait time of 500ms per line
+```
+
 ## PCB
 
 You can find the PCB for this at the [original project](https://github.com/brainsmoke/hexboard) in the `pcb/` subdirectory. The PCB contains an STM32 microcontroller that translates data that it receives over UART to the correct driving protocols for each of the segments.
