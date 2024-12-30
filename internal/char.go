@@ -6,12 +6,12 @@ import (
 	"time"
 )
 
-type CutoffStrategy int
+type Overflow int
 
 const (
-	CutoffStrategyINVALID CutoffStrategy = iota
-	CutoffStrategyCUT
-	CutoffStrategySCROLL
+	OverflowINVALID Overflow = iota
+	OverflowTRUNCATE
+	OverflowSCROLL
 )
 
 type CharDisplay struct {
@@ -32,13 +32,13 @@ func NewCharDisplay(path string) (*CharDisplay, error) {
 	return &c, nil
 }
 
-func (c *CharDisplay) Display(text []string, delay int, strat CutoffStrategy, keep bool) {
+func (c *CharDisplay) Display(text []string, delay int, strat Overflow, keep bool) {
 	for _, line := range text {
 		switch strat {
-		case CutoffStrategyCUT:
-			c.DisplayWithCutoff(line, 32)
+		case OverflowTRUNCATE:
+			c.DisplayWithTruncate(line, 32)
 			break
-		case CutoffStrategySCROLL:
+		case OverflowSCROLL:
 			c.DisplayWithScroll(line, 32)
 			break
 		}
@@ -52,7 +52,7 @@ func (c *CharDisplay) Display(text []string, delay int, strat CutoffStrategy, ke
 	}
 }
 
-func (c *CharDisplay) DisplayWithCutoff(text string, length int) {
+func (c *CharDisplay) DisplayWithTruncate(text string, length int) {
 	if len(text) > length {
 		text = text[:length]
 	}
