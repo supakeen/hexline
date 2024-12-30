@@ -35,14 +35,14 @@ var displayCmd = &cobra.Command{
 
 		if len(args) > 0 {
 			// Arguments were passed, show them.
-			display.Display(args, delay, false)
+			display.Display(args, delay, internal.CutoffStrategySCROLL, false)
 		} else {
 			// No arguments, use STDIN and any lines on it.
 			s := bufio.NewScanner(os.Stdin)
 
 			for s.Scan() {
 				t := strings.TrimSuffix(s.Text(), "\r\n")
-				display.Display([]string{t}, delay, false)
+				display.Display([]string{t}, delay, internal.CutoffStrategySCROLL, false)
 			}
 		}
 
