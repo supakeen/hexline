@@ -29,7 +29,7 @@ var displayCmd = &cobra.Command{
 	Args:       cobra.ArbitraryArgs,
 	ArgAliases: []string{"text"},
 	Run: func(cmd *cobra.Command, args []string) {
-		f, err := os.OpenFile("/dev/ttyACM0", os.O_RDWR, 0)
+		f, err := internal.GetDeviceFile(devicePath)
 
 		if err != nil {
 			panic(err)
@@ -37,15 +37,11 @@ var displayCmd = &cobra.Command{
 
 		defer f.Close()
 
-		if _, err := internal.SetRate(f, 115200); err != nil {
-			panic(err)
-		}
-
 		if len(args) > 0 {
 			// Arguments were passed, show them.
 			for _, t := range args {
 				f.Write([]byte(fmt.Sprintf("\r%s", t)))
-				time.Sleep(time.Duration(delay) * time.Millisecond)
+                time.Sleep(time.Duration(delay) * time.Millisecond)
 			}
 		} else {
 			// No arguments, use STDIN and any lines on it.

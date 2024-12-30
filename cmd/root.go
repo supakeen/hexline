@@ -6,7 +6,7 @@ import (
 
 var (
 	// Used for flags.
-	device string
+	devicePath string
 
 	rootCmd = &cobra.Command{
 		Use:   "hexline",
@@ -20,5 +20,5 @@ func Execute() error {
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVarP(&device, "device", "p", "/dev/ttyACM0", "hexline device path")
+	rootCmd.PersistentFlags().StringVarP(&devicePath, "device", "p", "/dev/ttyACM0", "hexline device path")
 }
