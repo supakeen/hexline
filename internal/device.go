@@ -1,7 +1,7 @@
 package internal
 
 import (
-    "os"
+	"os"
 )
 
 func GetDeviceFile(path string) (*os.File, error) {

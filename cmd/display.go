@@ -2,10 +2,8 @@ package cmd
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/spf13/cobra"
 
@@ -29,28 +27,22 @@ var displayCmd = &cobra.Command{
 	Args:       cobra.ArbitraryArgs,
 	ArgAliases: []string{"text"},
 	Run: func(cmd *cobra.Command, args []string) {
-		f, err := internal.GetDeviceFile(devicePath)
+		display, err := internal.NewCharDisplay(devicePath)
 
 		if err != nil {
 			panic(err)
 		}
 
-		defer f.Close()
-
 		if len(args) > 0 {
 			// Arguments were passed, show them.
-			for _, t := range args {
-				f.Write([]byte(fmt.Sprintf("\r%s", t)))
-                time.Sleep(time.Duration(delay) * time.Millisecond)
-			}
+			display.Display(args, delay, false)
 		} else {
 			// No arguments, use STDIN and any lines on it.
 			s := bufio.NewScanner(os.Stdin)
 
 			for s.Scan() {
 				t := strings.TrimSuffix(s.Text(), "\r\n")
-				f.Write([]byte(fmt.Sprintf("\r%s", t)))
-				time.Sleep(time.Duration(delay) * time.Millisecond)
+				display.Display([]string{t}, delay, false)
 			}
 		}
 
