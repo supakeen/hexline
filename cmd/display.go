@@ -11,8 +11,8 @@ import (
 )
 
 var (
-	delay  int
-	keep   bool
+	delay int
+	keep  bool
 )
 
 func init() {
@@ -37,14 +37,14 @@ var displayCmd = &cobra.Command{
 
 		if len(args) > 0 {
 			// Arguments were passed, show them.
-			display.Display(args, delay, internal.CutoffStrategySCROLL, keep)
+			display.Display(args, delay, internal.OverflowSCROLL, keep)
 		} else {
 			// No arguments, use STDIN and any lines on it.
 			s := bufio.NewScanner(os.Stdin)
 
 			for s.Scan() {
 				t := strings.TrimSuffix(s.Text(), "\r\n")
-				display.Display([]string{t}, delay, internal.CutoffStrategySCROLL, keep)
+				display.Display([]string{t}, delay, internal.OverflowSCROLL, keep)
 			}
 		}
 
