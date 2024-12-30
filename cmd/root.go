@@ -20,5 +20,5 @@ func Execute() error {
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVarP(&devicePath, "device", "p", "/dev/ttyACM0", "hexline device path")
+	rootCmd.PersistentFlags().StringVarP(&devicePath, "device-path", "p", "/dev/ttyACM0", "hexline device path")
 }
