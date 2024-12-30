@@ -31,6 +31,8 @@ This repository is also a Go package that can interface with the firmware provid
 # displays the lines from `/etc/passwd` with a wait time of 500ms per line
 ```
 
+If you want to install you can run `go install github.com/supakeen/hexline` and Go will take care of putting it somewhere on your `PATH`.
+
 ## PCB
 
 You can find the PCB for this at the [original project](https://github.com/brainsmoke/hexboard) in the `pcb/` subdirectory. The PCB contains an STM32 microcontroller that translates data that it receives over UART to the correct driving protocols for each of the segments.
