@@ -27,10 +27,10 @@ This repository is also a Go package that can interface with the firmware provid
 # displays 'some text'
 € go run ./main.go display -d 1000 'some text' 'some other text'
 # displays 'some text', waits 1000ms, displays 'some other text'
-€ go run ./main.go display < /etc/passwd
-# displays the lines from `/etc/passwd` with a wait time of 500ms per line
+€ go run ./main.go display -k=true < /etc/passwd
+# displays the lines from `/etc/passwd` with a wait time of 500ms
+# per line and keep the last line of text (don't clear the screen)
 ```
-
 If you want to install you can run `go install github.com/supakeen/hexline` and Go will take care of putting it somewhere on your `PATH`.
 
 ## PCB

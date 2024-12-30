@@ -11,11 +11,13 @@ import (
 )
 
 var (
-	delay int
+	delay  int
+	keep   bool
 )
 
 func init() {
 	displayCmd.PersistentFlags().IntVarP(&delay, "delay", "d", 500, "delay between lines (in ms)")
+	displayCmd.PersistentFlags().BoolVarP(&keep, "keep", "k", true, "keep the last line on screen (true/false)")
 
 	rootCmd.AddCommand(displayCmd)
 }
@@ -35,14 +37,14 @@ var displayCmd = &cobra.Command{
 
 		if len(args) > 0 {
 			// Arguments were passed, show them.
-			display.Display(args, delay, internal.CutoffStrategySCROLL, false)
+			display.Display(args, delay, internal.CutoffStrategySCROLL, keep)
 		} else {
 			// No arguments, use STDIN and any lines on it.
 			s := bufio.NewScanner(os.Stdin)
 
 			for s.Scan() {
 				t := strings.TrimSuffix(s.Text(), "\r\n")
-				display.Display([]string{t}, delay, internal.CutoffStrategySCROLL, false)
+				display.Display([]string{t}, delay, internal.CutoffStrategySCROLL, keep)
 			}
 		}
 
