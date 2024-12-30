@@ -24,6 +24,8 @@
 #include "pico/stdio.h"
 #include "pico/multicore.h"
 
+#include <tusb.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
@@ -68,11 +70,14 @@ void loop(void) {
     }
 }
 
+// core0 is dedicated to receiving (and formatting, if necessary_data
 void main_core0(void) {
+    tusb_init();
+
     loop();
 }
 
-// On core1 we continuously draw the display in a loop, we want to split this out
+// core1 is dedicated to drawing the display in a loop, we want to split this out
 // later when we do double buffering again.
 void main_core1(void) {
     while(1) {
@@ -88,5 +93,6 @@ int main() {
     D = disp_init(DISP_MODE_CHAR);
 
     multicore_launch_core1(main_core1);
+
     main_core0();
 }
