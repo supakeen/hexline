@@ -38,7 +38,8 @@ pico_sdk_init()
 add_executable(
     hexline
     main.c
-    disp.c)
+    disp.c
+    musb.c)
 
 pico_generate_pio_header(
     hexline
